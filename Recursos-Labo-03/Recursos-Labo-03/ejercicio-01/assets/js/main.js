@@ -1,14 +1,27 @@
-const countVotes = (votes, index) => {
-    let count = votes.filter((obj) => obj.candidate === votes.candidate).length;
-    return count;
-    //return votes.filter((x) => x == index).length;
-}
+//Función para contar votos
+const countVotes = (votes) => {
+    let result = {};
+    votes.forEach(vote => {
+        result[vote.candidate] = (result[vote.candidate] || 0) + 1;
+    });
+    return result;
+};
+//Función para mostrar resultados
+const showResults = (result) => {
+    if (Object.keys(result).length === 0) {
+        alert("No hay votos para mostrar.");
+        return;
+    }
 
-const showResults = (/*recibe*/) => {
-    //Code
-}
+    let resultString = "Resultados de la votación ->";
+    for (let candidate in result) {
+        resultString += `${candidate}: ${result[candidate]} votos `;
+    }
+    alert(resultString);
+};
 
 const main = () => {
+    //Arreglot
     let votes = [
         { candidate: 'Alice' },
         { candidate: 'Bob' },
@@ -17,17 +30,10 @@ const main = () => {
         { candidate: 'Bob' }
     ];
 
-    //let result = countVotes(votes);
-
-
-    const result = countVotes(votes);
-
-    console.log(countVotes(votes,'Alice'));
-
-}
+    //Guarda el retorno de la funcion en una variable
+    let result = countVotes(votes);
+    //Mostrar resultados
+    showResults(result);
+};
 
 main();
-
-
-
-

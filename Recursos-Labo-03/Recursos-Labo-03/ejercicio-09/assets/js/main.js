@@ -1,21 +1,42 @@
 const filterAvailableProducts = (products) => {
+    // Validar
+    if (!Array.isArray(products)) return [];
+
     return products.filter(product =>
-        product.stok > 0
-    )
+        // Validar
+        typeof product.stock === 'number' && product.stock > 0
+    );
 }
 
-const showProducts = (/*recibe*/) => {
-    //code
+//Mostrar productos
+const showProducts = (products) => {
+    if (products.length > 0) {
+        products.forEach(product => {
+            alert(`Producto: ${product.name}, Stock: ${product.stock}`)
+        });
+    } else {
+        alert("No tenemos productos :(")
+    }
 }
 
 const main = () => {
-    const products = [{ nombre: "silla", stok: 2 },
-    { nombre: "cama", stok: 4 },
-    { nombre: "pelota cuadrada", stok: 1 },
-    { nombre: "botella sin fondo", stok: 6 },]
+    //Arreglo de productos
+    const produtcs = [
+        { name: "chair", stock: 2 },
+        { name: "bed", stock: 4 },
+        { name: "square ball", stock: 0 },
+        { name: "bottle wihtout end", stock: 3 }
+    ]
 
-    const result = filterAvailableProducts(products);
-    console.log(result);
+    //Guarda el resultado de la funcion
+    const result = filterAvailableProducts(produtcs)
+
+    console.log(result)
+
+    showProducts(result)
+
+    //Muestra el resultado
+    console.log(`El numero ingresado es: $`)
 }
 
 main();
